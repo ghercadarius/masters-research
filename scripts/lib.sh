@@ -185,7 +185,7 @@ start_tunnel_if_needed() {
   log "Starting minikube tunnel for profile $MINIKUBE_PROFILE"
   minikube_bin="$(command -v minikube)"
   tunnel_home="${MINIKUBE_HOME:-${HOME:-}}"
-  tunnel_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  tunnel_path="$tunnel_home/.minikube/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   if sudo -n true >/dev/null 2>&1; then
     nohup sudo -n env HOME="$tunnel_home" MINIKUBE_HOME="$tunnel_home" PATH="$tunnel_path" "$minikube_bin" -p "$MINIKUBE_PROFILE" tunnel --bind-address="$TUNNEL_BIND_ADDRESS" >"$log_file" 2>&1 &
   else
