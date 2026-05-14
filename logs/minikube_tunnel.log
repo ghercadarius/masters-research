@@ -1,1 +1,2 @@
-[sudo] password for darius: *
+* Profile "sku-bench" not found. Run "minikube profile list" to view all profiles.
+  To start a cluster, run: "minikube start -p sku-bench"
