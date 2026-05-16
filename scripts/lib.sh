@@ -169,7 +169,6 @@ start_tunnel_if_needed() {
   local log_file="$ITERATION_DIR/$TUNNEL_LOG_FILE"
   local minikube_bin
   local tunnel_home
-  local tunnel_path
 
   mkdir -p "$(dirname "$pid_file")" "$(dirname "$log_file")"
 
@@ -185,9 +184,8 @@ start_tunnel_if_needed() {
   log "Starting minikube tunnel for profile $MINIKUBE_PROFILE"
   minikube_bin="$(command -v minikube)"
   tunnel_home="${MINIKUBE_HOME:-${HOME:-}}"
-  tunnel_path="$tunnel_home/.minikube/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   if sudo -n true >/dev/null 2>&1; then
-    nohup sudo -n env HOME="$tunnel_home" MINIKUBE_HOME="$tunnel_home" PATH="$tunnel_path" "$minikube_bin" -p "$MINIKUBE_PROFILE" tunnel --bind-address="$TUNNEL_BIND_ADDRESS" >"$log_file" 2>&1 &
+    nohup sudo -n env HOME="$tunnel_home" MINIKUBE_HOME="$tunnel_home" PATH="$PATH" "$minikube_bin" -p "$MINIKUBE_PROFILE" tunnel --bind-address="$TUNNEL_BIND_ADDRESS" >"$log_file" 2>&1 &
   else
     nohup minikube -p "$MINIKUBE_PROFILE" tunnel --bind-address="$TUNNEL_BIND_ADDRESS" >"$log_file" 2>&1 &
   fi
