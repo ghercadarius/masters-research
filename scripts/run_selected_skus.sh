@@ -90,7 +90,7 @@ for sku in "${SKUS[@]}"; do
 
   log "Starting SKU $sku ($sku_index/$total_skus)"
   set +e
-  RUN_OUTPUT="$(bash "$SCRIPT_DIR/run_sku_test.sh" "$sku" 2>"$MATRIX_DIR/${sku}.stderr.log")"
+  RUN_OUTPUT="$(bash "$SCRIPT_DIR/run_sku_test.sh" "$sku" 2> >(tee -a "$MATRIX_DIR/${sku}.stderr.log" >&2))"
   EXIT_CODE=$?
   set -e
 
