@@ -45,7 +45,7 @@
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.path">${__P(base_path,)}${__P(work_path,/work)}?mode=${__groovy(['cpu','memory','io','mixed'][new java.util.Random().nextInt(4)])}&amp;intensity=${__groovy(${__P(work_min_intensity,2)} + new java.util.Random().nextInt(${__P(work_max_intensity,14)} - ${__P(work_min_intensity,2)} + 1))}</stringProp>
+            <stringProp name="HTTPSampler.path">${__P(base_path,)}${__P(work_path,/work)}?mode=${__groovy(('cpu|memory|io|mixed').split('\\|')[new java.util.Random().nextInt(4)])}&amp;intensity=${__groovy(${__P(work_min_intensity,2)} + new java.util.Random().nextInt(${__P(work_max_intensity,14)} - ${__P(work_min_intensity,2)} + 1))}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
