@@ -1,0 +1,1 @@
+! Starting v1.39.0, minikube will default to "containerd" container runtime. See #21973 for more info.

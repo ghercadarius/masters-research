@@ -1,0 +1,4 @@
+* The "kvm2" driver should not be used with root privileges. If you wish to continue as root, use --force.
+* If you are running minikube within a VM, consider using --driver=none:
+*   https://minikube.sigs.k8s.io/docs/reference/drivers/none/
+X Exiting due to DRV_AS_ROOT: The "kvm2" driver should not be used with root privileges.

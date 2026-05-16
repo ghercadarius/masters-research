@@ -1,0 +1,10 @@
+sku_id,status,exit_code,run_dir,error_timestamp,error_reason
+c4-r4g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:32Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c4-r4g.stderr.log
+c4-r8g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:33Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c4-r8g.stderr.log
+c4-r16g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:34Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c4-r16g.stderr.log
+c8-r8g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:34Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c8-r8g.stderr.log
+c8-r16g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:35Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c8-r16g.stderr.log
+c8-r24g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:35Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c8-r24g.stderr.log
+c16-r8g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:36Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c16-r8g.stderr.log
+c16-r16g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:36Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c16-r16g.stderr.log
+c16-r24g,failed,57,* Using the kvm2 driver based on user configuration,2026-05-14T17:47:37Z,see /home/darius/dizertatie/masters-research/results/matrix-baseline-20260514T174732Z/c16-r24g.stderr.log
