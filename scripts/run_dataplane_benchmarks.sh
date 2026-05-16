@@ -8,6 +8,7 @@ source "$SCRIPT_DIR/lib.sh"
 
 load_common_env
 ensure_core_dirs
+log "Dataplane benchmarks starting (selection=${1:-all})"
 
 if [[ $# -lt 1 ]]; then
   SELECTION="all"
@@ -27,8 +28,13 @@ for variant in "${VARIANTS[@]}"; do
   MATRIX_LABEL="dataplane-${DATAPLANE_MODE}"
   MATRIX_BASE_DIR="$ITERATION_DIR/results/benchmarks/${DATAPLANE_MODE}"
   log "Running dataplane benchmark for $DATAPLANE_MODE"
+  log "Matrix label: $MATRIX_LABEL"
+  log "Matrix base dir: $MATRIX_BASE_DIR"
+  log "Selection: $SELECTION"
   DATAPLANE_MODE="$DATAPLANE_MODE" \
     MATRIX_LABEL="$MATRIX_LABEL" \
     MATRIX_BASE_DIR="$MATRIX_BASE_DIR" \
     bash "$SCRIPT_DIR/run_selected_skus.sh" "$SELECTION" "$@"
 done
+
+log "Dataplane benchmarks finished"

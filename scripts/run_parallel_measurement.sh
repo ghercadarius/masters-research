@@ -19,18 +19,22 @@ mkdir -p "$RUN_DIR"
 
 POWER_FILE="$RUN_DIR/power_samples.csv"
 
+log "Parallel measurement config: target=$TARGET_BASE_URL duration=${TEST_DURATION_SECONDS}s run_dir=$RUN_DIR"
+
 bash "$SCRIPT_DIR/collect_power_metrics.sh" \
   "$TEST_DURATION_SECONDS" \
   "$POWER_SAMPLE_INTERVAL_SECONDS" \
   "$MINIKUBE_PROFILE" \
   "$POWER_FILE" &
 POWER_PID=$!
+log "Power sampler started (pid=$POWER_PID)"
 
 bash "$SCRIPT_DIR/run_load_test.sh" \
   "$TARGET_BASE_URL" \
   "$TEST_DURATION_SECONDS" \
   "$RUN_DIR" &
 LOAD_PID=$!
+log "Load test started (pid=$LOAD_PID)"
 
 cleanup() {
   kill "$POWER_PID" "$LOAD_PID" >/dev/null 2>&1 || true

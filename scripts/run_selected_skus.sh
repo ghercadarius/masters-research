@@ -8,6 +8,7 @@ source "$SCRIPT_DIR/lib.sh"
 
 load_common_env
 ensure_core_dirs
+DATAPLANE_MODE="$(normalize_dataplane_mode "${DATAPLANE_MODE:-baseline}")"
 
 RUNTIME_FILE="$(runtime_file_path)"
 if [[ ! -f "$RUNTIME_FILE" ]]; then
@@ -51,6 +52,8 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
+log "Matrix run config: selection=$SELECTION dataplane=$DATAPLANE_MODE continue_on_error=$CONTINUE_ON_ERROR max_failures=$MAX_FAILURES resume_from=${RESUME_FROM:-none}"
+
 MATRIX_LABEL="${MATRIX_LABEL:-$(normalize_dataplane_mode "${DATAPLANE_MODE:-baseline}")}" 
 MATRIX_LABEL="${MATRIX_LABEL// /}"
 RUN_ID="matrix-${MATRIX_LABEL}-$(date -u +"%Y%m%dT%H%M%SZ")"
@@ -59,18 +62,25 @@ MATRIX_DIR="$MATRIX_BASE_DIR/$RUN_ID"
 LEDGER_FILE="$MATRIX_DIR/ledger.csv"
 mkdir -p "$MATRIX_DIR"
 
+log "Matrix output directory: $MATRIX_DIR"
+
 if [[ "$SELECTION" == "all" ]]; then
   mapfile -t SKUS < <(list_all_skus)
 else
   IFS=',' read -r -a SKUS <<< "$SELECTION"
 fi
 
+log "SKUs selected: ${#SKUS[@]}"
+
 echo "sku_id,status,exit_code,run_dir,error_timestamp,error_reason" > "$LEDGER_FILE"
 
 started=false
 failures=0
 
+total_skus=${#SKUS[@]}
+sku_index=0
 for sku in "${SKUS[@]}"; do
+  sku_index=$((sku_index + 1))
   if [[ -n "$RESUME_FROM" && "$started" == false ]]; then
     if [[ "$sku" != "$RESUME_FROM" ]]; then
       continue
@@ -78,7 +88,7 @@ for sku in "${SKUS[@]}"; do
   fi
   started=true
 
-  log "Starting SKU: $sku"
+  log "Starting SKU $sku ($sku_index/$total_skus)"
   set +e
   RUN_OUTPUT="$(bash "$SCRIPT_DIR/run_sku_test.sh" "$sku" 2>"$MATRIX_DIR/${sku}.stderr.log")"
   EXIT_CODE=$?

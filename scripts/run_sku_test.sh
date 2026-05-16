@@ -33,6 +33,7 @@ RUN_DIR="$ITERATION_DIR/results/$SKU_ID/$RUN_ID"
 mkdir -p "$RUN_DIR"
 
 log "Running SKU $SKU_ID (cpu=$CPU, memory_mb=$MEMORY_MB, dataplane=$DATAPLANE_MODE)"
+log "Run directory: $RUN_DIR"
 
 START_ARGS=()
 if [[ "$DATAPLANE_MODE" == "calico" ]]; then
@@ -40,6 +41,10 @@ if [[ "$DATAPLANE_MODE" == "calico" ]]; then
 fi
 if [[ "$DATAPLANE_MODE" == "cilium" ]]; then
   START_ARGS+=(--cni=cilium)
+fi
+
+if [[ ${#START_ARGS[@]} -gt 0 ]]; then
+  log "Minikube start args: ${START_ARGS[*]}"
 fi
 
 minikube delete -p "$MINIKUBE_PROFILE" >/dev/null 2>&1 || true
@@ -51,6 +56,7 @@ minikube start \
   --memory="$MEMORY_MB" \
   "${START_ARGS[@]}"
 
+log "Configuring dataplane: $DATAPLANE_MODE"
 configure_dataplane "$DATAPLANE_MODE"
 
 ensure_namespace "$NAMESPACE"
@@ -60,14 +66,19 @@ NODE_NAME="$(kubectl get nodes -o jsonpath='{.items[0].metadata.name}')"
 kubectl label node "$NODE_NAME" sku.id="$SKU_ID" sku.cpus="$CPU" sku.memory-mb="$MEMORY_MB" --overwrite >/dev/null
 
 if [[ "$BUILD_APP_IMAGE" == "true" ]]; then
+  log "Building app image: $APP_IMAGE"
   bash "$SCRIPT_DIR/build_app_image.sh"
 fi
 
 REPLICAS="$(bash "$SCRIPT_DIR/compute_replicas.sh")"
+log "Computed replicas: $REPLICAS"
 bash "$SCRIPT_DIR/deploy_app.sh" "$REPLICAS" "$RUN_DIR"
 ENDPOINT="$(cat "$RUN_DIR/endpoint.txt")"
+log "Load test endpoint: $ENDPOINT"
 
+log "Starting parallel measurement"
 bash "$SCRIPT_DIR/run_parallel_measurement.sh" "$ENDPOINT" "$RUN_DIR"
+log "Parallel measurement complete"
 
 TOTAL_REQUESTS="$(awk -F, 'NR==2 {print $1}' "$RUN_DIR/load_summary.csv" 2>/dev/null || echo 0)"
 SUCCESS_REQUESTS="$(awk -F, 'NR==2 {print $2}' "$RUN_DIR/load_summary.csv" 2>/dev/null || echo 0)"
