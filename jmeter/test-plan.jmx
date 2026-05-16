@@ -41,11 +41,25 @@
         <hashTree/>
         <RandomController guiclass="LogicControllerGui" testclass="RandomController" testname="Random Endpoint Mix" enabled="true"/>
         <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate work params" enabled="true">
+            <stringProp name="cacheKey"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">def modes = ['cpu', 'memory', 'io', 'mixed']
+def mode = modes[new java.util.Random().nextInt(modes.size())]
+int min = Integer.parseInt(props.getProperty('work_min_intensity', '2'))
+int max = Integer.parseInt(props.getProperty('work_max_intensity', '14'))
+int intensity = min + new java.util.Random().nextInt(max - min + 1)
+vars.put('work_mode', mode)
+vars.put('work_intensity', String.valueOf(intensity))</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /work random mode" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.path">${__P(base_path,)}${__P(work_path,/work)}?mode=${__groovy(('cpu|memory|io|mixed').split('\\|')[new java.util.Random().nextInt(4)])}&amp;intensity=${__groovy(${__P(work_min_intensity,2)} + new java.util.Random().nextInt(${__P(work_max_intensity,14)} - ${__P(work_min_intensity,2)} + 1))}</stringProp>
+            <stringProp name="HTTPSampler.path">${__P(base_path,)}${__P(work_path,/work)}?mode=${work_mode}&amp;intensity=${work_intensity}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
