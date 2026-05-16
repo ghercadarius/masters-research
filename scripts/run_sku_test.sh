@@ -34,13 +34,22 @@ mkdir -p "$RUN_DIR"
 
 log "Running SKU $SKU_ID (cpu=$CPU, memory_mb=$MEMORY_MB, dataplane=$DATAPLANE_MODE)"
 
+START_ARGS=()
+if [[ "$DATAPLANE_MODE" == "calico" ]]; then
+  START_ARGS+=(--cni=calico)
+fi
+if [[ "$DATAPLANE_MODE" == "cilium" ]]; then
+  START_ARGS+=(--cni=cilium)
+fi
+
 minikube delete -p "$MINIKUBE_PROFILE" >/dev/null 2>&1 || true
 minikube start \
   --profile="$MINIKUBE_PROFILE" \
   --driver=kvm2 \
   --nodes=1 \
   --cpus="$CPU" \
-  --memory="$MEMORY_MB"
+  --memory="$MEMORY_MB" \
+  "${START_ARGS[@]}"
 
 configure_dataplane "$DATAPLANE_MODE"
 

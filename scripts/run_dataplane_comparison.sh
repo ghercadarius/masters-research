@@ -19,7 +19,7 @@ fi
 if [[ -n "${DATAPLANE_VARIANTS:-}" ]]; then
   read -r -a VARIANTS <<< "$DATAPLANE_VARIANTS"
 else
-  VARIANTS=(baseline calico-ebpf cilium)
+  VARIANTS=(baseline calico calico-ebpf cilium)
 fi
 
 for variant in "${VARIANTS[@]}"; do

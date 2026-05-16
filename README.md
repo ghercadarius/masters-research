@@ -86,6 +86,21 @@ Run selected list:
 bash scripts/run_selected_skus.sh c1-r2g,c2-r4g,c4-r8g
 ```
 
+### 3b) Dataplane benchmarks (dedicated paths)
+
+Run baseline, Calico eBPF, and Cilium in separate benchmark paths:
+
+```bash
+bash scripts/run_dataplane_benchmarks.sh all
+```
+
+Results are organized under:
+
+- `results/benchmarks/baseline/`
+- `results/benchmarks/calico/`
+- `results/benchmarks/calico-ebpf/`
+- `results/benchmarks/cilium/`
+
 ### 4) Stop suite
 
 Stop tunnel and keep cluster:
@@ -128,9 +143,11 @@ bash scripts/run_selected_skus.sh all --resume-from c4-r8g
   - VM PID.
 
 Dataplane selection is controlled by `DATAPLANE_MODE` in `config/common.env`.
-Supported values are `baseline`, `calico-ebpf`, and `cilium`.
+Supported values are `baseline`, `calico`, `calico-ebpf`, and `cilium`.
+The built-in Calico mode starts Minikube with `--cni=calico`.
+The built-in Cilium mode starts Minikube with `--cni=cilium`.
 The Calico eBPF path expects `CALICO_EBPF_MANIFEST_PATH` to point to a tuned
-manifest; `cilium` enables the Minikube addon.
+manifest.
 
 Show latest sample for one run:
 
@@ -181,15 +198,16 @@ Install dependencies:
 pip install pandas matplotlib
 ```
 
-Run analysis from `iteration2/`:
+Run analysis from `iteration2/` (aggregates all runs per SKU and dataplane):
 
 ```bash
-python3 scripts/plot_results.py --results-dir results --use-latest-per-sku
+python3 scripts/plot_results.py --results-dir results
 ```
 
 Output is written to:
 
 - `results/analysis-<timestamp>/cleaned_runs.csv`
+- `results/analysis-<timestamp>/aggregated_runs.csv`
 - `results/analysis-<timestamp>/insights.txt`
 - `results/analysis-<timestamp>/throughput_by_sku.png`
 - `results/analysis-<timestamp>/latency_by_sku.png`
@@ -198,6 +216,11 @@ Output is written to:
 - `results/analysis-<timestamp>/throughput_per_vm_watt_by_sku.png`
 - `results/analysis-<timestamp>/throughput_heatmap_cpu_memory.png`
 - `results/analysis-<timestamp>/throughput_heatmap_cpu_memory_<dataplane>.png`
+- `results/analysis-<timestamp>/per-sku/`
+  - `throughput_by_dataplane_<sku>.png`
+  - `latency_by_dataplane_<sku>.png`
+  - `vm_power_by_dataplane_<sku>.png`
+  - `throughput_per_vm_watt_by_dataplane_<sku>.png`
 
 ## Troubleshooting
 

@@ -51,10 +51,11 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-MATRIX_LABEL="${MATRIX_LABEL:-$(normalize_dataplane_mode "${DATAPLANE_MODE:-baseline}")}"
+MATRIX_LABEL="${MATRIX_LABEL:-$(normalize_dataplane_mode "${DATAPLANE_MODE:-baseline}")}" 
 MATRIX_LABEL="${MATRIX_LABEL// /}"
 RUN_ID="matrix-${MATRIX_LABEL}-$(date -u +"%Y%m%dT%H%M%SZ")"
-MATRIX_DIR="$ITERATION_DIR/results/$RUN_ID"
+MATRIX_BASE_DIR="${MATRIX_BASE_DIR:-$ITERATION_DIR/results}"
+MATRIX_DIR="$MATRIX_BASE_DIR/$RUN_ID"
 LEDGER_FILE="$MATRIX_DIR/ledger.csv"
 mkdir -p "$MATRIX_DIR"
 

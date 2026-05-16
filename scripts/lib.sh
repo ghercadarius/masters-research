@@ -20,10 +20,14 @@ load_common_env() {
   if [[ ! -f "$COMMON_ENV" ]]; then
     die "Missing config file: $COMMON_ENV"
   fi
+  local dataplane_override="${DATAPLANE_MODE:-}"
   set -a
   # shellcheck source=/dev/null
   source "$COMMON_ENV"
   set +a
+  if [[ -n "$dataplane_override" ]]; then
+    DATAPLANE_MODE="$dataplane_override"
+  fi
 }
 
 ensure_core_dirs() {
@@ -61,7 +65,7 @@ normalize_dataplane_mode() {
   mode="${mode,,}"
 
   case "$mode" in
-    baseline|calico-ebpf|cilium)
+    baseline|calico|calico-ebpf|cilium)
       echo "$mode"
       ;;
     *)
@@ -86,6 +90,12 @@ configure_dataplane() {
     baseline)
       log "Using Minikube default dataplane baseline"
       ;;
+    calico)
+      log "Using Minikube built-in Calico CNI (requires --cni=calico on minikube start)"
+      if kubectl -n kube-system get daemonset calico-node >/dev/null 2>&1; then
+        wait_for_daemonset_rollout kube-system calico-node 600
+      fi
+      ;;
     calico-ebpf)
       if [[ -z "${CALICO_EBPF_MANIFEST_PATH:-}" ]]; then
         die "DATAPLANE_MODE=calico-ebpf requires CALICO_EBPF_MANIFEST_PATH to point to a tuned Calico manifest"
@@ -98,9 +108,10 @@ configure_dataplane() {
       wait_for_daemonset_rollout kube-system calico-node 600
       ;;
     cilium)
-      log "Enabling Cilium addon in Minikube"
-      minikube addons enable cilium --profile="$MINIKUBE_PROFILE"
-      wait_for_daemonset_rollout kube-system cilium 600
+      log "Using Minikube built-in Cilium CNI (requires --cni=cilium on minikube start)"
+      if kubectl -n kube-system get daemonset cilium >/dev/null 2>&1; then
+        wait_for_daemonset_rollout kube-system cilium 600
+      fi
       ;;
   esac
 }

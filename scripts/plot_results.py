@@ -2,8 +2,8 @@
 """Generate plots and insights from iteration2 SKU benchmark results.
 
 This script scans per-run `run_summary.csv` files under the results directory,
-normalizes locale-affected numeric fields, aggregates latest run per SKU, and
-produces PNG plots plus a text insights report.
+normalizes locale-affected numeric fields, aggregates runs per SKU/dataplane,
+and produces PNG plots plus a text insights report.
 """
 
 from __future__ import annotations
@@ -203,6 +203,8 @@ def main() -> None:
         else (results_dir / f"analysis-{timestamp}")
     )
     output_dir.mkdir(parents=True, exist_ok=True)
+    per_sku_dir = output_dir / "per-sku"
+    per_sku_dir.mkdir(parents=True, exist_ok=True)
 
     run_files = sorted(results_dir.rglob("run_summary.csv"))
     if not run_files:
@@ -236,7 +238,11 @@ def main() -> None:
 
     df = df.sort_values(["sku_cpu", "sku_memory_gb", "run_id"])
 
-    variant_order = [mode for mode in ["baseline", "calico-ebpf", "cilium"] if mode in df["dataplane_mode"].unique().tolist()]
+    variant_order = [
+        mode
+        for mode in ["baseline", "calico-ebpf", "cilium"]
+        if mode in df["dataplane_mode"].unique().tolist()
+    ]
     if not variant_order:
         variant_order = sorted(df["dataplane_mode"].dropna().unique().tolist())
     sku_order = (
@@ -248,18 +254,56 @@ def main() -> None:
 
     palette = {"baseline": "#2a9d8f", "calico-ebpf": "#264653", "cilium": "#f4a261"}
 
+    metrics = [
+        "throughput_rps",
+        "avg_latency_ms",
+        "avg_vm_watts",
+        "avg_host_watts",
+        "throughput_per_vm_watt",
+        "replicas",
+    ]
+    aggregated = (
+        df.groupby(["dataplane_mode", "sku_id", "sku_cpu", "sku_memory_gb"])[metrics]
+        .agg(["mean", "std"])
+        .reset_index()
+    )
+    new_columns = []
+    for col in aggregated.columns:
+        if isinstance(col, tuple):
+            new_columns.append("_".join([part for part in col if part]))
+        else:
+            new_columns.append(col)
+    aggregated.columns = new_columns
+
+    mean_df = aggregated.rename(
+        columns={
+            "throughput_rps_mean": "throughput_rps",
+            "avg_latency_ms_mean": "avg_latency_ms",
+            "avg_vm_watts_mean": "avg_vm_watts",
+            "avg_host_watts_mean": "avg_host_watts",
+            "throughput_per_vm_watt_mean": "throughput_per_vm_watt",
+            "replicas_mean": "replicas",
+        }
+    )
+
     def grouped_bar(metric: str, title: str, ylabel: str, output_name: str) -> None:
         fig, ax = plt.subplots(figsize=(14, 6))
         positions = list(range(len(sku_order)))
         width = 0.8 / max(1, len(variant_order))
 
         for index, dataplane in enumerate(variant_order):
-            variant_df = df[df["dataplane_mode"] == dataplane].set_index("sku_id").reindex(sku_order)
+            variant_df = (
+                aggregated[aggregated["dataplane_mode"] == dataplane]
+                .set_index("sku_id")
+                .reindex(sku_order)
+            )
             offsets = [pos + (index - (len(variant_order) - 1) / 2) * width for pos in positions]
             ax.bar(
                 offsets,
-                variant_df[metric].fillna(0),
+                variant_df[f"{metric}_mean"].fillna(0),
                 width=width,
+                yerr=variant_df[f"{metric}_std"].fillna(0),
+                capsize=4,
                 label=dataplane,
                 color=palette.get(dataplane),
             )
@@ -276,24 +320,44 @@ def main() -> None:
 
     cleaned_csv = output_dir / "cleaned_runs.csv"
     df.to_csv(cleaned_csv, index=False)
+    aggregated_csv = output_dir / "aggregated_runs.csv"
+    aggregated.sort_values(
+        ["dataplane_mode", "sku_cpu", "sku_memory_gb", "sku_id"]
+    ).to_csv(aggregated_csv, index=False)
 
     # Plot 1: Throughput per SKU.
-    grouped_bar("throughput_rps", "Throughput by SKU and Dataplane", "Requests/sec", "throughput_by_sku.png")
+    grouped_bar(
+        "throughput_rps",
+        "Throughput by SKU and Dataplane",
+        "Requests/sec",
+        "throughput_by_sku.png",
+    )
 
     # Plot 2: Latency per SKU.
-    grouped_bar("avg_latency_ms", "Average Latency by SKU and Dataplane", "Latency (ms)", "latency_by_sku.png")
+    grouped_bar(
+        "avg_latency_ms",
+        "Average Latency by SKU and Dataplane",
+        "Latency (ms)",
+        "latency_by_sku.png",
+    )
 
     # Plot 3: Power comparison.
     fig, ax = plt.subplots(figsize=(14, 6))
     positions = list(range(len(sku_order)))
     width = 0.8 / max(1, len(variant_order))
     for index, dataplane in enumerate(variant_order):
-        variant_df = df[df["dataplane_mode"] == dataplane].set_index("sku_id").reindex(sku_order)
+        variant_df = (
+            aggregated[aggregated["dataplane_mode"] == dataplane]
+            .set_index("sku_id")
+            .reindex(sku_order)
+        )
         offsets = [pos + (index - (len(variant_order) - 1) / 2) * width for pos in positions]
         ax.bar(
             offsets,
-            variant_df["avg_vm_watts"].fillna(0),
+            variant_df["avg_vm_watts_mean"].fillna(0),
             width=width,
+            yerr=variant_df["avg_vm_watts_std"].fillna(0),
+            capsize=4,
             label=f"{dataplane} VM W",
             color=palette.get(dataplane),
         )
@@ -310,14 +374,14 @@ def main() -> None:
     # Plot 4: Throughput vs VM watts scatter.
     fig, ax = plt.subplots(figsize=(10, 7))
     for dataplane in variant_order:
-        variant_df = df[df["dataplane_mode"] == dataplane]
+        variant_df = mean_df[mean_df["dataplane_mode"] == dataplane]
         ax.scatter(
             variant_df["avg_vm_watts"],
             variant_df["throughput_rps"],
             color=palette.get(dataplane),
             label=dataplane,
         )
-    for _, row in df.iterrows():
+    for _, row in mean_df.iterrows():
         ax.annotate(str(row["sku_id"]), (row["avg_vm_watts"], row["throughput_rps"]), fontsize=8)
     ax.set_title("Throughput vs VM-attributed Power")
     ax.set_xlabel("VM-attributed Power (W)")
@@ -327,10 +391,10 @@ def main() -> None:
     fig.savefig(output_dir / "throughput_vs_vm_watts.png", dpi=160)
     plt.close(fig)
 
-    # Plot 5: CPU/RAM heatmap for throughput (latest by SKU only for clarity).
-    latest = df.sort_values("run_id").groupby(["dataplane_mode", "sku_id"], as_index=False).tail(1)
+    # Plot 5: CPU/RAM heatmap for throughput (aggregated across runs).
+    summary = mean_df.copy()
     for index, dataplane in enumerate(variant_order):
-        variant_latest = latest[latest["dataplane_mode"] == dataplane]
+        variant_latest = summary[summary["dataplane_mode"] == dataplane]
         if variant_latest.empty:
             continue
         heat = variant_latest.pivot_table(
@@ -364,26 +428,79 @@ def main() -> None:
         "throughput_per_vm_watt_by_sku.png",
     )
 
+    per_sku_metrics = [
+        ("throughput_rps", "Throughput by Dataplane", "Requests/sec", "throughput_by_dataplane"),
+        ("avg_latency_ms", "Average Latency by Dataplane", "Latency (ms)", "latency_by_dataplane"),
+        ("avg_vm_watts", "VM-attributed Power by Dataplane", "Watts", "vm_power_by_dataplane"),
+        (
+            "throughput_per_vm_watt",
+            "Throughput per VM Watt by Dataplane",
+            "Requests/sec/W",
+            "throughput_per_vm_watt_by_dataplane",
+        ),
+    ]
+
+    for sku_id in sku_order:
+        sku_df = aggregated[aggregated["sku_id"] == sku_id].set_index("dataplane_mode")
+        for metric, title, ylabel, prefix in per_sku_metrics:
+            if sku_df.empty:
+                continue
+            means = sku_df.get(f"{metric}_mean")
+            if means is None or means.dropna().empty:
+                continue
+            plot_modes = [
+                mode for mode in variant_order if mode in means.index and not math.isnan(means[mode])
+            ]
+            if not plot_modes:
+                continue
+            values = [means[mode] for mode in plot_modes]
+            stds = sku_df.get(f"{metric}_std")
+            errors = []
+            for mode in plot_modes:
+                if stds is None or mode not in stds.index:
+                    errors.append(0)
+                else:
+                    std_value = stds[mode]
+                    errors.append(0 if math.isnan(std_value) else std_value)
+
+            fig, ax = plt.subplots(figsize=(8, 5))
+            positions = list(range(len(plot_modes)))
+            ax.bar(
+                positions,
+                values,
+                yerr=errors,
+                capsize=4,
+                color=[palette.get(mode) for mode in plot_modes],
+            )
+            ax.set_title(f"{title} - {sku_id}")
+            ax.set_xlabel("Dataplane")
+            ax.set_ylabel(ylabel)
+            ax.set_xticks(positions)
+            ax.set_xticklabels(plot_modes)
+            fig.tight_layout()
+            fig.savefig(per_sku_dir / f"{prefix}_{sku_id}.png", dpi=160)
+            plt.close(fig)
+
     # Insights extraction.
-    best_throughput = latest.loc[latest["throughput_rps"].idxmax()]
-    best_latency = latest.loc[latest["avg_latency_ms"].idxmin()]
-    best_efficiency = latest.loc[latest["throughput_per_vm_watt"].fillna(-1).idxmax()]
-    highest_power = latest.loc[latest["avg_vm_watts"].idxmax()]
+    best_throughput = summary.loc[summary["throughput_rps"].idxmax()]
+    best_latency = summary.loc[summary["avg_latency_ms"].idxmin()]
+    best_efficiency = summary.loc[summary["throughput_per_vm_watt"].fillna(-1).idxmax()]
+    highest_power = summary.loc[summary["avg_vm_watts"].idxmax()]
 
     corr_rep_tp = correlation(
-        latest["replicas"].astype(float).tolist(),
-        latest["throughput_rps"].astype(float).tolist(),
+        summary["replicas"].astype(float).tolist(),
+        summary["throughput_rps"].astype(float).tolist(),
     )
     corr_pow_tp = correlation(
-        latest["avg_vm_watts"].astype(float).tolist(),
-        latest["throughput_rps"].astype(float).tolist(),
+        summary["avg_vm_watts"].astype(float).tolist(),
+        summary["throughput_rps"].astype(float).tolist(),
     )
 
     insights: List[str] = []
     insights.append("SKU Benchmark Insights")
     insights.append(f"Generated at: {datetime.now(timezone.utc).isoformat()}")
     insights.append(f"Input runs parsed: {len(df)}")
-    insights.append(f"Unique SKUs: {latest['sku_id'].nunique()}")
+    insights.append(f"Unique SKUs: {summary['sku_id'].nunique()}")
     insights.append(f"Dataplanes: {', '.join(variant_order)}")
     insights.append("")
     insights.append(
@@ -408,7 +525,7 @@ def main() -> None:
     insights.append("")
 
     for dataplane in variant_order:
-        variant_latest = latest[latest["dataplane_mode"] == dataplane]
+        variant_latest = summary[summary["dataplane_mode"] == dataplane]
         if variant_latest.empty:
             continue
         best_variant_tp = variant_latest.loc[variant_latest["throughput_rps"].idxmax()]
@@ -423,8 +540,8 @@ def main() -> None:
         )
     insights.append("")
 
-    for cpu in sorted(latest["sku_cpu"].dropna().unique()):
-        cpu_df = latest[latest["sku_cpu"] == cpu]
+    for cpu in sorted(summary["sku_cpu"].dropna().unique()):
+        cpu_df = summary[summary["sku_cpu"] == cpu]
         if cpu_df.empty:
             continue
         row = cpu_df.loc[cpu_df["throughput_rps"].idxmax()]
@@ -439,6 +556,7 @@ def main() -> None:
 
     print(f"Analysis completed. Output directory: {output_dir}")
     print(f"Cleaned data: {cleaned_csv}")
+    print(f"Aggregated data: {aggregated_csv}")
     print(f"Insights: {insights_path}")
 
 
