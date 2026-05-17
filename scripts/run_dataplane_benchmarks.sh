@@ -52,9 +52,19 @@ for variant in "${VARIANTS[@]}"; do
   log "Matrix label: $MATRIX_LABEL"
   log "Matrix base dir: $MATRIX_BASE_DIR"
   log "Selection: $SELECTION"
+  EFFECTIVE_SELECTION="$SELECTION"
+  if [[ "$DATAPLANE_MODE" != "baseline" && "$SELECTION" == "all" ]]; then
+    mapfile -t FILTERED_SKUS < <(list_all_skus | grep -v '^c4-')
+    if [[ ${#FILTERED_SKUS[@]} -eq 0 ]]; then
+      log "No SKUs remain after filtering out c4-*; skipping $DATAPLANE_MODE"
+      continue
+    fi
+    EFFECTIVE_SELECTION="$(IFS=','; echo "${FILTERED_SKUS[*]}")"
+    log "Filtered selection (excluding c4-*): $EFFECTIVE_SELECTION"
+  fi
   MATRIX_LABEL="$MATRIX_LABEL" \
     MATRIX_BASE_DIR="$MATRIX_BASE_DIR" \
-    bash "$SCRIPT_DIR/run_selected_skus.sh" "$SELECTION" --dataplane "$DATAPLANE_MODE" "${PASSTHROUGH_ARGS[@]}"
+    bash "$SCRIPT_DIR/run_selected_skus.sh" "$EFFECTIVE_SELECTION" --dataplane "$DATAPLANE_MODE" "${PASSTHROUGH_ARGS[@]}"
 done
 
 log "Dataplane benchmarks finished"
