@@ -114,6 +114,23 @@ wait_for_crd_established() {
   kubectl wait --for=condition=Established "crd/$crd_name" --timeout="${timeout_seconds}s"
 }
 
+wait_for_resource_objects() {
+  local resource_name="$1"
+  local timeout_seconds="${2:-180}"
+  local deadline=$((SECONDS + timeout_seconds))
+
+  while (( SECONDS < deadline )); do
+    if kubectl get "$resource_name" --no-headers >/dev/null 2>&1; then
+      if kubectl get "$resource_name" --no-headers 2>/dev/null | grep -q .; then
+        return 0
+      fi
+    fi
+    sleep 3
+  done
+
+  return 1
+}
+
 configure_dataplane() {
   local mode
   mode="$(normalize_dataplane_mode "${1:-baseline}")"
@@ -154,10 +171,15 @@ configure_dataplane() {
         log "Waiting for Tigera CRDs to be established"
         wait_for_crd_established installations.operator.tigera.io 240
         wait_for_crd_established apiservers.operator.tigera.io 240
+        wait_for_crd_established tigerastatuses.operator.tigera.io 240
         log "Applying Calico eBPF custom resources: $custom_resources_path"
         kubectl apply -f "$custom_resources_path"
         log "Waiting for Calico eBPF components to be ready"
-        kubectl wait --for=condition=Available tigerastatus --all --timeout=600s
+        if wait_for_resource_objects tigerastatus 300; then
+          kubectl wait --for=condition=Available tigerastatus --all --timeout=600s
+        else
+          log "Warning: tigerastatus resources not available yet; skipping availability wait"
+        fi
       fi
       if kubectl -n calico-system get daemonset calico-node >/dev/null 2>&1; then
         wait_for_daemonset_rollout calico-system calico-node 600
