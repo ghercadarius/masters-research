@@ -132,6 +132,9 @@ configure_dataplane() {
         fi
         log "Installing Tigera operator: $operator_manifest"
         kubectl apply -f "$operator_manifest"
+        log "Waiting for Tigera CRDs to be established"
+        kubectl wait --for=condition=Established crd/installations.operator.tigera.io --timeout=180s
+        kubectl wait --for=condition=Established crd/apiservers.operator.tigera.io --timeout=180s
         log "Applying Calico eBPF custom resources: $custom_resources_path"
         kubectl apply -f "$custom_resources_path"
         log "Waiting for Calico eBPF components to be ready"
