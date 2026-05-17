@@ -1,0 +1,2 @@
+sku_id,run_id,cpu,memory_mb,replicas,total_requests,success_requests,avg_latency_ms,avg_vm_watts,avg_host_watts,power_samples,dataplane_mode,endpoint
+c16-r16g,20260517T143822Z,16,16384,49,14164,14164,327,849333,333333,49,333333,6,calico,http://10.104.9.249:80

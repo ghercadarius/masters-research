@@ -1,0 +1,10 @@
+sku_id,status,exit_code,run_dir,error_timestamp,error_reason
+c4-r4g,success,0,/home/darius/dizertatie/masters-research/results/c4-r4g/20260517T140418Z,,
+c4-r8g,success,0,/home/darius/dizertatie/masters-research/results/c4-r8g/20260517T140700Z,,
+c4-r16g,success,0,/home/darius/dizertatie/masters-research/results/c4-r16g/20260517T140859Z,,
+c8-r8g,success,0,/home/darius/dizertatie/masters-research/results/c8-r8g/20260517T141133Z,,
+c8-r16g,success,0,/home/darius/dizertatie/masters-research/results/c8-r16g/20260517T141413Z,,
+c8-r24g,success,0,/home/darius/dizertatie/masters-research/results/c8-r24g/20260517T141650Z,,
+c16-r8g,success,0,/home/darius/dizertatie/masters-research/results/c16-r8g/20260517T141927Z,,
+c16-r16g,success,0,/home/darius/dizertatie/masters-research/results/c16-r16g/20260517T142127Z,,
+c16-r24g,success,0,/home/darius/dizertatie/masters-research/results/c16-r24g/20260517T142404Z,,

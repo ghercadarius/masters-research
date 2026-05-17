@@ -1,2 +1,0 @@
-sku_id,run_id,cpu,memory_mb,replicas,total_requests,success_requests,avg_latency_ms,avg_vm_watts,avg_host_watts,power_samples,dataplane_mode,endpoint
-c4-r4g,20260517T010450Z,4,4096,12,12035,12035,2402,497933,333333,51,266667,30,baseline,http://10.100.192.231:80

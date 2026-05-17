@@ -1,0 +1,22 @@
+SKU Benchmark Insights
+Generated at: 2026-05-17T15:13:33.064273+00:00
+Input runs parsed: 15
+Unique SKUs: 9
+Dataplanes: baseline, cilium
+
+Best throughput: c16-r24g (47.610 req/s)
+Best latency: c16-r24g (324.000 ms)
+Best throughput-per-watt: c8-r16g (0.000 req/s/W)
+Highest VM-attributed power: c16-r16g (853666.667 W)
+
+Correlation replicas vs throughput: 0.903
+Correlation vm_watts vs throughput: 0.620
+
+baseline best throughput: c16-r24g (47.610 req/s)
+baseline best throughput-per-watt: c8-r16g (0.000 req/s/W)
+cilium best throughput: c16-r16g (47.150 req/s)
+cilium best throughput-per-watt: c16-r24g (0.000 req/s/W)
+
+Best memory for c4: r8g (15.167 req/s, 1222.000 ms)
+Best memory for c8: r8g (29.800 req/s, 574.000 ms)
+Best memory for c16: r24g (47.610 req/s, 324.000 ms)
