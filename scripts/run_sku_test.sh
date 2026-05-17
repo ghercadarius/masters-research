@@ -43,7 +43,10 @@ if [[ "$DATAPLANE_MODE" == "cilium" ]]; then
   START_ARGS+=(--cni=cilium)
 fi
 if [[ "$DATAPLANE_MODE" == "calico-ebpf" ]]; then
-  START_ARGS+=(--network-plugin=cni --cni=false --extra-config=kubeadm.skip-phases=addon/kube-proxy)
+  START_ARGS+=(--network-plugin=cni --cni=false)
+  if [[ "${CALICO_EBPF_SKIP_KUBE_PROXY_START:-false}" == "true" ]]; then
+    START_ARGS+=(--extra-config=kubeadm.skip-phases=addon/kube-proxy)
+  fi
 fi
 
 if [[ ${#START_ARGS[@]} -gt 0 ]]; then

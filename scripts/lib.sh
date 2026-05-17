@@ -166,6 +166,12 @@ configure_dataplane() {
       else
         log "Warning: calico-node daemonset not found yet"
       fi
+      if [[ "${CALICO_EBPF_DISABLE_KUBE_PROXY:-true}" == "true" ]]; then
+        if kubectl -n kube-system get daemonset kube-proxy >/dev/null 2>&1; then
+          log "Disabling kube-proxy (Calico eBPF)"
+          kubectl -n kube-system delete daemonset kube-proxy >/dev/null
+        fi
+      fi
       ;;
     cilium)
       log "Using Minikube built-in Cilium CNI (requires --cni=cilium on minikube start)"

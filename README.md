@@ -146,11 +146,16 @@ Dataplane selection is controlled by `DATAPLANE_MODE` in `config/common.env`.
 Supported values are `baseline`, `calico`, `calico-ebpf`, and `cilium`.
 The built-in Calico mode starts Minikube with `--cni=calico`.
 The built-in Cilium mode starts Minikube with `--cni=cilium`.
-Calico eBPF uses Minikube with `--network-plugin=cni --cni=false --extra-config=kubeadm.skip-phases=addon/kube-proxy`
+Calico eBPF uses Minikube with `--network-plugin=cni --cni=false` to bootstrap
 and installs the Tigera operator + custom resources from:
 
 - `CALICO_EBPF_OPERATOR_MANIFEST_URL`
 - `CALICO_EBPF_CUSTOM_RESOURCES_PATH` (default: `config/calico-ebpf-custom-resources.yaml`)
+
+By default kube-proxy is disabled after Calico eBPF is ready; control this with:
+
+- `CALICO_EBPF_SKIP_KUBE_PROXY_START` (default: false)
+- `CALICO_EBPF_DISABLE_KUBE_PROXY` (default: true)
 
 If you already have a tuned manifest, you can set `CALICO_EBPF_MANIFEST_PATH` instead.
 
