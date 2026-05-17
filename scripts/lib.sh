@@ -95,6 +95,25 @@ wait_for_daemonset_rollout() {
   kubectl -n "$namespace" rollout status daemonset/"$daemonset_name" --timeout="${timeout_seconds}s"
 }
 
+wait_for_crd_established() {
+  local crd_name="$1"
+  local timeout_seconds="${2:-180}"
+  local deadline=$((SECONDS + timeout_seconds))
+
+  while (( SECONDS < deadline )); do
+    if kubectl get crd "$crd_name" >/dev/null 2>&1; then
+      break
+    fi
+    sleep 2
+  done
+
+  if ! kubectl get crd "$crd_name" >/dev/null 2>&1; then
+    die "CRD not created: $crd_name"
+  fi
+
+  kubectl wait --for=condition=Established "crd/$crd_name" --timeout="${timeout_seconds}s"
+}
+
 configure_dataplane() {
   local mode
   mode="$(normalize_dataplane_mode "${1:-baseline}")"
@@ -133,8 +152,8 @@ configure_dataplane() {
         log "Installing Tigera operator: $operator_manifest"
         kubectl apply -f "$operator_manifest"
         log "Waiting for Tigera CRDs to be established"
-        kubectl wait --for=condition=Established crd/installations.operator.tigera.io --timeout=180s
-        kubectl wait --for=condition=Established crd/apiservers.operator.tigera.io --timeout=180s
+        wait_for_crd_established installations.operator.tigera.io 240
+        wait_for_crd_established apiservers.operator.tigera.io 240
         log "Applying Calico eBPF custom resources: $custom_resources_path"
         kubectl apply -f "$custom_resources_path"
         log "Waiting for Calico eBPF components to be ready"
