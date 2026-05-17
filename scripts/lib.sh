@@ -149,7 +149,7 @@ wait_for_resource_objects() {
 
 apply_calico_ebpf_felix_config() {
   local felix_config_path
-  felix_config_path="${CALICO_EBPF_FELIX_CONFIG_PATH:-config/calico-ebpf-felix.yaml}"
+  felix_config_path="${CALICO_EBPF_FELIX_CONFIG_PATH:-../config/calico-ebpf-felix.yaml}"
   felix_config_path="$(resolve_path "$felix_config_path")"
   if [[ ! -f "$felix_config_path" ]]; then
     log "Warning: Calico Felix config not found: $felix_config_path"
