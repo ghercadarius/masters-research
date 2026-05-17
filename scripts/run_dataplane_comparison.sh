@@ -26,5 +26,6 @@ for variant in "${VARIANTS[@]}"; do
   DATAPLANE_MODE="$(normalize_dataplane_mode "$variant")"
   MATRIX_LABEL="dataplane-${DATAPLANE_MODE}"
   log "Running dataplane comparison for $DATAPLANE_MODE"
-  DATAPLANE_MODE="$DATAPLANE_MODE" MATRIX_LABEL="$MATRIX_LABEL" bash "$SCRIPT_DIR/run_selected_skus.sh" "$SELECTION" "$@"
+  MATRIX_LABEL="$MATRIX_LABEL" \
+    bash "$SCRIPT_DIR/run_selected_skus.sh" "$SELECTION" --dataplane "$DATAPLANE_MODE" "$@"
 done

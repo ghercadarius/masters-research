@@ -19,6 +19,7 @@ SELECTION="${1:-all}"
 CONTINUE_ON_ERROR="$CONTINUE_ON_ERROR_DEFAULT"
 MAX_FAILURES=999999
 RESUME_FROM=""
+DATAPLANE_OVERRIDE=""
 
 shift_count=0
 if [[ $# -ge 1 ]]; then
@@ -45,12 +46,21 @@ while [[ $# -gt 0 ]]; do
       RESUME_FROM="$2"
       shift
       ;;
+    --dataplane)
+      DATAPLANE_OVERRIDE="$2"
+      shift
+      ;;
     *)
       die "Unknown option: $1"
       ;;
   esac
   shift
 done
+
+if [[ -n "$DATAPLANE_OVERRIDE" ]]; then
+  DATAPLANE_MODE="$(normalize_dataplane_mode "$DATAPLANE_OVERRIDE")"
+fi
+export DATAPLANE_MODE
 
 log "Matrix run config: selection=$SELECTION dataplane=$DATAPLANE_MODE continue_on_error=$CONTINUE_ON_ERROR max_failures=$MAX_FAILURES resume_from=${RESUME_FROM:-none}"
 

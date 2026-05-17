@@ -31,10 +31,9 @@ for variant in "${VARIANTS[@]}"; do
   log "Matrix label: $MATRIX_LABEL"
   log "Matrix base dir: $MATRIX_BASE_DIR"
   log "Selection: $SELECTION"
-  DATAPLANE_MODE="$DATAPLANE_MODE" \
-    MATRIX_LABEL="$MATRIX_LABEL" \
+  MATRIX_LABEL="$MATRIX_LABEL" \
     MATRIX_BASE_DIR="$MATRIX_BASE_DIR" \
-    bash "$SCRIPT_DIR/run_selected_skus.sh" "$SELECTION" "$@"
+    bash "$SCRIPT_DIR/run_selected_skus.sh" "$SELECTION" --dataplane "$DATAPLANE_MODE" "$@"
 done
 
 log "Dataplane benchmarks finished"
