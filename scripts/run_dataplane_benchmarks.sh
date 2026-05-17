@@ -17,11 +17,32 @@ else
   shift
 fi
 
-if [[ -n "${DATAPLANE_VARIANTS:-}" ]]; then
-  read -r -a VARIANTS <<< "$DATAPLANE_VARIANTS"
+DATAPLANE_VARIANTS_OVERRIDE=""
+PASSTHROUGH_ARGS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --dataplanes|--dataplane-variants)
+      DATAPLANE_VARIANTS_OVERRIDE="$2"
+      shift
+      ;;
+    *)
+      PASSTHROUGH_ARGS+=("$1")
+      ;;
+  esac
+  shift
+done
+
+if [[ -n "$DATAPLANE_VARIANTS_OVERRIDE" ]]; then
+  DATAPLANE_VARIANTS_OVERRIDE="${DATAPLANE_VARIANTS_OVERRIDE//,/ }"
+  read -r -a VARIANTS <<< "$DATAPLANE_VARIANTS_OVERRIDE"
+elif [[ -n "${DATAPLANE_VARIANTS:-}" ]]; then
+  DATAPLANE_VARIANTS_CLEAN="${DATAPLANE_VARIANTS//,/ }"
+  read -r -a VARIANTS <<< "$DATAPLANE_VARIANTS_CLEAN"
 else
   VARIANTS=(baseline calico cilium)
 fi
+
+log "Dataplane variants: ${VARIANTS[*]}"
 
 for variant in "${VARIANTS[@]}"; do
   DATAPLANE_MODE="$(normalize_dataplane_mode "$variant")"
@@ -33,7 +54,7 @@ for variant in "${VARIANTS[@]}"; do
   log "Selection: $SELECTION"
   MATRIX_LABEL="$MATRIX_LABEL" \
     MATRIX_BASE_DIR="$MATRIX_BASE_DIR" \
-    bash "$SCRIPT_DIR/run_selected_skus.sh" "$SELECTION" --dataplane "$DATAPLANE_MODE" "$@"
+    bash "$SCRIPT_DIR/run_selected_skus.sh" "$SELECTION" --dataplane "$DATAPLANE_MODE" "${PASSTHROUGH_ARGS[@]}"
 done
 
 log "Dataplane benchmarks finished"
