@@ -114,6 +114,22 @@ wait_for_crd_established() {
   kubectl wait --for=condition=Established "crd/$crd_name" --timeout="${timeout_seconds}s"
 }
 
+try_wait_for_crd_established() {
+  local crd_name="$1"
+  local timeout_seconds="${2:-180}"
+  local deadline=$((SECONDS + timeout_seconds))
+
+  while (( SECONDS < deadline )); do
+    if kubectl get crd "$crd_name" >/dev/null 2>&1; then
+      kubectl wait --for=condition=Established "crd/$crd_name" --timeout="${timeout_seconds}s" || true
+      return 0
+    fi
+    sleep 2
+  done
+
+  return 1
+}
+
 wait_for_resource_objects() {
   local resource_name="$1"
   local timeout_seconds="${2:-180}"
@@ -141,7 +157,11 @@ apply_calico_ebpf_felix_config() {
   fi
 
   if ! kubectl get crd felixconfigurations.crd.projectcalico.org >/dev/null 2>&1; then
-    wait_for_crd_established felixconfigurations.crd.projectcalico.org 240
+    log "Waiting for FelixConfiguration CRD to be available"
+    if ! try_wait_for_crd_established felixconfigurations.crd.projectcalico.org 240; then
+      log "Warning: FelixConfiguration CRD not available; skipping Felix config apply"
+      return 0
+    fi
   fi
 
   log "Applying Calico Felix config: $felix_config_path"
@@ -207,6 +227,7 @@ configure_dataplane() {
       else
         log "Warning: calico-node daemonset not found yet"
       fi
+      apply_calico_ebpf_felix_config
       if [[ "${CALICO_EBPF_DISABLE_KUBE_PROXY:-true}" == "true" ]]; then
         if kubectl -n kube-system get daemonset kube-proxy >/dev/null 2>&1; then
           log "Disabling kube-proxy (Calico eBPF)"
