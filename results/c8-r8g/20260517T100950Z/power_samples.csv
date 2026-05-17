@@ -1,0 +1,3 @@
+timestamp,sample,host_pkg_joules,host_pkg_watts,vm_cpu_share,vm_attributed_watts,vm_pid
+2026-05-17T11:16:56Z,1,117,49,11,749000,0,016250,0,190921,24623
+2026-05-17T11:17:06Z,2,118,74,11,874000,0,017429,0,206952,24623

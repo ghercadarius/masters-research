@@ -1,2 +1,32 @@
-* Profile "sku-bench" not found. Run "minikube profile list" to view all profiles.
-  To start a cluster, run: "minikube start -p sku-bench"
+Status:	
+	machine: sku-bench
+	pid: 30156
+	route: 10.96.0.0/12 -> 192.168.39.55
+	minikube: Running
+	services: []
+    errors: 
+		minikube: no errors
+		router: no errors
+		loadbalancer emulator: no errors
+Status:	
+	machine: sku-bench
+	pid: 30156
+	route: 10.96.0.0/12 -> 192.168.39.55
+	minikube: Running
+	services: [sample-python-webapp]
+    errors: 
+		minikube: no errors
+		router: no errors
+		loadbalancer emulator: no errors
+E0517 14:30:10.586137   30156 tunnel.go:147] failed to register tunnel: there is already a running tunnel for this machine: ID { Route: 10.96.0.0/12 -> 192.168.39.55, machineName: sku-bench, Pid: 30156 }
+Status:	
+	machine: sku-bench
+	pid: 30156
+	route: 10.96.0.0/12 -> 192.168.39.55
+	minikube: Running
+	services: [sample-python-webapp]
+    errors: 
+		minikube: no errors
+		router: there is already a running tunnel for this machine: ID { Route: 10.96.0.0/12 -> 192.168.39.55, machineName: sku-bench, Pid: 30156 }
+		loadbalancer emulator: no errors
+E0517 14:31:39.217912   30156 logFile.go:53] failed to close the audit log: invalid argument

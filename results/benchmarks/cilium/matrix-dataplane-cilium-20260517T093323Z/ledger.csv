@@ -1,0 +1,4 @@
+sku_id,status,exit_code,run_dir,error_timestamp,error_reason
+c4-r4g,failed,1,[2026-05-17T09:40:37Z] Load test completed: /home/darius/dizertatie/masters-research/results/c4-r4g/20260517T093323Z/load_summary.csv,2026-05-17T09:40:37Z,see /home/darius/dizertatie/masters-research/results/benchmarks/cilium/matrix-dataplane-cilium-20260517T093323Z/c4-r4g.stderr.log
+c4-r8g,failed,1,Waiting for deployment "sample-python-webapp" rollout to finish: 15 of 16 updated replicas are available...,2026-05-17T09:46:07Z,see /home/darius/dizertatie/masters-research/results/benchmarks/cilium/matrix-dataplane-cilium-20260517T093323Z/c4-r8g.stderr.log
+c4-r16g,failed,1,Waiting for deployment "sample-python-webapp" rollout to finish: 15 of 16 updated replicas are available...,2026-05-17T09:51:32Z,see /home/darius/dizertatie/masters-research/results/benchmarks/cilium/matrix-dataplane-cilium-20260517T093323Z/c4-r16g.stderr.log

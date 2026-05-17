@@ -1,0 +1,2 @@
+sku_id,status,exit_code,run_dir,error_timestamp,error_reason
+cilium,failed,1,[2026-05-17T09:29:50Z] ERROR: Unknown SKU: cilium,2026-05-17T09:29:50Z,see /home/darius/dizertatie/masters-research/results/benchmarks/baseline/matrix-dataplane-baseline-20260517T092950Z/cilium.stderr.log
