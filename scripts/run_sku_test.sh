@@ -42,6 +42,9 @@ fi
 if [[ "$DATAPLANE_MODE" == "cilium" ]]; then
   START_ARGS+=(--cni=cilium)
 fi
+if [[ "$DATAPLANE_MODE" == "calico-ebpf" ]]; then
+  START_ARGS+=(--network-plugin=cni --cni=false --extra-config=kubeadm.skip-phases=addon/kube-proxy)
+fi
 
 if [[ ${#START_ARGS[@]} -gt 0 ]]; then
   log "Minikube start args: ${START_ARGS[*]}"

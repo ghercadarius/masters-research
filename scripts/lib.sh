@@ -60,6 +60,19 @@ dependency_check() {
   fi
 }
 
+resolve_path() {
+  local path="$1"
+  if [[ -z "$path" ]]; then
+    echo ""
+    return 0
+  fi
+  if [[ "$path" = /* ]]; then
+    echo "$path"
+  else
+    echo "$ITERATION_DIR/$path"
+  fi
+}
+
 normalize_dataplane_mode() {
   local mode="${1:-baseline}"
   mode="${mode,,}"
@@ -97,15 +110,40 @@ configure_dataplane() {
       fi
       ;;
     calico-ebpf)
-      if [[ -z "${CALICO_EBPF_MANIFEST_PATH:-}" ]]; then
-        die "DATAPLANE_MODE=calico-ebpf requires CALICO_EBPF_MANIFEST_PATH to point to a tuned Calico manifest"
+      if kubectl -n kube-system get daemonset kube-proxy >/dev/null 2>&1; then
+        log "Warning: kube-proxy is still present; Calico eBPF expects kube-proxy to be disabled"
       fi
-      if [[ ! -f "$CALICO_EBPF_MANIFEST_PATH" ]]; then
-        die "Calico eBPF manifest not found: $CALICO_EBPF_MANIFEST_PATH"
+      if [[ -n "${CALICO_EBPF_MANIFEST_PATH:-}" ]]; then
+        local ebpf_manifest_path
+        ebpf_manifest_path="$(resolve_path "$CALICO_EBPF_MANIFEST_PATH")"
+        if [[ ! -f "$ebpf_manifest_path" ]]; then
+          die "Calico eBPF manifest not found: $ebpf_manifest_path"
+        fi
+        log "Applying Calico eBPF manifest: $ebpf_manifest_path"
+        kubectl apply -f "$ebpf_manifest_path"
+      else
+        local operator_manifest
+        local custom_resources_path
+        operator_manifest="${CALICO_EBPF_OPERATOR_MANIFEST_URL:-https://raw.githubusercontent.com/projectcalico/calico/v3.30.0/manifests/tigera-operator.yaml}"
+        custom_resources_path="${CALICO_EBPF_CUSTOM_RESOURCES_PATH:-config/calico-ebpf-custom-resources.yaml}"
+        custom_resources_path="$(resolve_path "$custom_resources_path")"
+        if [[ ! -f "$custom_resources_path" ]]; then
+          die "Calico eBPF custom resources not found: $custom_resources_path"
+        fi
+        log "Installing Tigera operator: $operator_manifest"
+        kubectl apply -f "$operator_manifest"
+        log "Applying Calico eBPF custom resources: $custom_resources_path"
+        kubectl apply -f "$custom_resources_path"
+        log "Waiting for Calico eBPF components to be ready"
+        kubectl wait --for=condition=Available tigerastatus --all --timeout=600s
       fi
-      log "Applying Calico eBPF manifest: $CALICO_EBPF_MANIFEST_PATH"
-      kubectl apply -f "$CALICO_EBPF_MANIFEST_PATH"
-      wait_for_daemonset_rollout kube-system calico-node 600
+      if kubectl -n calico-system get daemonset calico-node >/dev/null 2>&1; then
+        wait_for_daemonset_rollout calico-system calico-node 600
+      elif kubectl -n kube-system get daemonset calico-node >/dev/null 2>&1; then
+        wait_for_daemonset_rollout kube-system calico-node 600
+      else
+        log "Warning: calico-node daemonset not found yet"
+      fi
       ;;
     cilium)
       log "Using Minikube built-in Cilium CNI (requires --cni=cilium on minikube start)"
