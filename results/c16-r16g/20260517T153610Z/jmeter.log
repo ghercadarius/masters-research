@@ -1,0 +1,348 @@
+2026-05-17 18:37:07,176 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Loading user properties from: /opt/apache-jmeter-5.6.3/bin/user.properties
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Loading system properties from: /opt/apache-jmeter-5.6.3/bin/system.properties
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: protocol=http
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: host=10.104.45.229
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: port=80
+2026-05-17 18:37:07,182 WARN o.a.j.JMeter: Removing JMeter property: base_path
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: threads=100
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: ramp_up=2
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: duration=60
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: work_min_intensity=2
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: work_max_intensity=14
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: batch_min_intensity=2
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: batch_max_intensity=10
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.output_format=csv
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.print_field_names=true
+2026-05-17 18:37:07,182 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.time=true
+2026-05-17 18:37:07,183 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.timestamp_format=ms
+2026-05-17 18:37:07,183 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.label=true
+2026-05-17 18:37:07,183 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.response_code=true
+2026-05-17 18:37:07,183 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.thread_name=true
+2026-05-17 18:37:07,183 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.successful=true
+2026-05-17 18:37:07,183 INFO o.a.j.JMeter: Setting JMeter property: jmeter.save.saveservice.elapsed=true
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: Copyright (c) 1998-2024 The Apache Software Foundation
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: Version 5.6.3
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: java.version=1.8.0_482
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: os.name=Linux
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: os.arch=amd64
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: os.version=6.17.0-23-generic
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: file.encoding=UTF-8
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: java.awt.headless=true
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: Max memory     =1073741824
+2026-05-17 18:37:07,185 INFO o.a.j.JMeter: Available Processors =28
+2026-05-17 18:37:07,188 INFO o.a.j.JMeter: Default Locale=English (EN)
+2026-05-17 18:37:07,188 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2026-05-17 18:37:07,188 INFO o.a.j.JMeter: JMeterHome=/opt/apache-jmeter-5.6.3
+2026-05-17 18:37:07,188 INFO o.a.j.JMeter: user.dir  =/home/darius/dizertatie/masters-research/scripts
+2026-05-17 18:37:07,188 INFO o.a.j.JMeter: PWD       =/home/darius/dizertatie/masters-research/scripts
+2026-05-17 18:37:07,188 INFO o.a.j.JMeter: IP: 127.0.1.1 Name: darius-LOQ-Tower-17IRR9 FullName: darius-LOQ-Tower-17IRR9
+2026-05-17 18:37:07,196 INFO o.a.j.s.FileServer: Default base='/home/darius/dizertatie/masters-research/scripts'
+2026-05-17 18:37:07,197 INFO o.a.j.s.FileServer: Set new base='/home/darius/dizertatie/masters-research/jmeter'
+2026-05-17 18:37:07,256 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2026-05-17 18:37:07,264 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2026-05-17 18:37:07,266 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2026-05-17 18:37:07,269 INFO o.a.j.s.SaveService: Loading file: /home/darius/dizertatie/masters-research/jmeter/test-plan.jmx
+2026-05-17 18:37:07,311 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-05-17 18:37:07,311 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-05-17 18:37:07,311 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-05-17 18:37:07,311 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-05-17 18:37:07,311 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2026-05-17 18:37:07,311 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2026-05-17 18:37:07,460 INFO o.a.j.JMeter: Creating summariser <summary>
+2026-05-17 18:37:07,468 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2026-05-17 18:37:07,469 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-05-17 18:37:07,469 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-05-17 18:37:07,471 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2026-05-17 18:37:07,471 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2026-05-17 18:37:07,712 INFO o.a.j.JMeter: Running test (1779032227712)
+2026-05-17 18:37:07,740 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Load Users
+2026-05-17 18:37:07,740 INFO o.a.j.e.StandardJMeterEngine: Starting 100 threads for group Load Users.
+2026-05-17 18:37:07,740 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2026-05-17 18:37:07,740 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=100 ramp-up=2 delayedStart=false
+2026-05-17 18:37:07,745 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-1
+2026-05-17 18:37:07,760 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2026-05-17 18:37:07,760 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2026-05-17 18:37:07,762 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-2
+2026-05-17 18:37:07,781 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-3
+2026-05-17 18:37:07,801 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-4
+2026-05-17 18:37:07,821 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-5
+2026-05-17 18:37:07,841 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-6
+2026-05-17 18:37:07,860 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-7
+2026-05-17 18:37:07,881 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-8
+2026-05-17 18:37:07,901 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-9
+2026-05-17 18:37:07,920 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-10
+2026-05-17 18:37:07,940 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-11
+2026-05-17 18:37:07,961 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-12
+2026-05-17 18:37:07,981 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-13
+2026-05-17 18:37:08,001 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-14
+2026-05-17 18:37:08,020 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-15
+2026-05-17 18:37:08,040 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-16
+2026-05-17 18:37:08,061 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-17
+2026-05-17 18:37:08,081 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-18
+2026-05-17 18:37:08,100 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-19
+2026-05-17 18:37:08,120 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-20
+2026-05-17 18:37:08,121 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = darius-LOQ-Tower-17IRR9
+2026-05-17 18:37:08,124 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2026-05-17 18:37:08,125 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2026-05-17 18:37:08,125 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
+2026-05-17 18:37:08,125 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2026-05-17 18:37:08,125 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2026-05-17 18:37:08,140 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-21
+2026-05-17 18:37:08,161 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-22
+2026-05-17 18:37:08,181 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-23
+2026-05-17 18:37:08,201 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-24
+2026-05-17 18:37:08,220 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-25
+2026-05-17 18:37:08,240 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-26
+2026-05-17 18:37:08,260 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-27
+2026-05-17 18:37:08,281 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-28
+2026-05-17 18:37:08,301 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-29
+2026-05-17 18:37:08,321 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-30
+2026-05-17 18:37:08,340 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-31
+2026-05-17 18:37:08,360 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-32
+2026-05-17 18:37:08,380 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-33
+2026-05-17 18:37:08,400 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-34
+2026-05-17 18:37:08,421 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-35
+2026-05-17 18:37:08,441 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-36
+2026-05-17 18:37:08,461 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-37
+2026-05-17 18:37:08,480 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-38
+2026-05-17 18:37:08,500 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-39
+2026-05-17 18:37:08,520 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-40
+2026-05-17 18:37:08,540 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-41
+2026-05-17 18:37:08,561 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-42
+2026-05-17 18:37:08,581 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-43
+2026-05-17 18:37:08,601 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-44
+2026-05-17 18:37:08,620 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-45
+2026-05-17 18:37:08,640 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-46
+2026-05-17 18:37:08,660 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-47
+2026-05-17 18:37:08,680 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-48
+2026-05-17 18:37:08,701 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-49
+2026-05-17 18:37:08,721 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-50
+2026-05-17 18:37:08,741 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-51
+2026-05-17 18:37:08,760 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-52
+2026-05-17 18:37:08,780 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-53
+2026-05-17 18:37:08,800 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-54
+2026-05-17 18:37:08,820 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-55
+2026-05-17 18:37:08,840 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-56
+2026-05-17 18:37:08,861 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-57
+2026-05-17 18:37:08,880 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-58
+2026-05-17 18:37:08,901 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-59
+2026-05-17 18:37:08,920 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-60
+2026-05-17 18:37:08,940 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-61
+2026-05-17 18:37:08,960 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-62
+2026-05-17 18:37:08,980 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-63
+2026-05-17 18:37:09,001 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-64
+2026-05-17 18:37:09,020 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-65
+2026-05-17 18:37:09,041 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-66
+2026-05-17 18:37:09,060 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-67
+2026-05-17 18:37:09,080 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-68
+2026-05-17 18:37:09,100 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-69
+2026-05-17 18:37:09,120 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-70
+2026-05-17 18:37:09,140 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-71
+2026-05-17 18:37:09,160 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-72
+2026-05-17 18:37:09,181 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-73
+2026-05-17 18:37:09,200 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-74
+2026-05-17 18:37:09,221 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-75
+2026-05-17 18:37:09,241 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-76
+2026-05-17 18:37:09,260 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-77
+2026-05-17 18:37:09,280 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-78
+2026-05-17 18:37:09,300 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-79
+2026-05-17 18:37:09,320 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-80
+2026-05-17 18:37:09,340 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-81
+2026-05-17 18:37:09,361 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-82
+2026-05-17 18:37:09,381 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-83
+2026-05-17 18:37:09,401 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-84
+2026-05-17 18:37:09,421 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-85
+2026-05-17 18:37:09,440 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-86
+2026-05-17 18:37:09,460 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-87
+2026-05-17 18:37:09,480 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-88
+2026-05-17 18:37:09,500 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-89
+2026-05-17 18:37:09,520 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-90
+2026-05-17 18:37:09,540 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-91
+2026-05-17 18:37:09,561 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-92
+2026-05-17 18:37:09,581 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-93
+2026-05-17 18:37:09,601 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-94
+2026-05-17 18:37:09,621 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-95
+2026-05-17 18:37:09,641 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-96
+2026-05-17 18:37:09,660 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-97
+2026-05-17 18:37:09,680 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-98
+2026-05-17 18:37:09,700 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-99
+2026-05-17 18:37:09,720 INFO o.a.j.t.JMeterThread: Thread started: Load Users 1-100
+2026-05-17 18:37:30,001 INFO o.a.j.r.Summariser: summary +   4917 in 00:00:22 =  220.6/s Avg:   335 Min:     1 Max:  2213 Err:     0 (0.00%) Active: 100 Started: 100 Finished: 0
+2026-05-17 18:38:00,013 INFO o.a.j.r.Summariser: summary +   7147 in 00:00:30 =  238.1/s Avg:   331 Min:     1 Max:  1931 Err:     0 (0.00%) Active: 100 Started: 100 Finished: 0
+2026-05-17 18:38:00,013 INFO o.a.j.r.Summariser: summary =  12064 in 00:00:52 =  230.7/s Avg:   332 Min:     1 Max:  2213 Err:     0 (0.00%)
+2026-05-17 18:38:07,641 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-6
+2026-05-17 18:38:07,642 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-5
+2026-05-17 18:38:07,648 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-32
+2026-05-17 18:38:07,648 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-64
+2026-05-17 18:38:07,652 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-90
+2026-05-17 18:38:07,659 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-57
+2026-05-17 18:38:07,672 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-63
+2026-05-17 18:38:07,675 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-3
+2026-05-17 18:38:07,676 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-21
+2026-05-17 18:38:07,676 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-85
+2026-05-17 18:38:07,679 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-31
+2026-05-17 18:38:07,680 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-100
+2026-05-17 18:38:07,699 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-94
+2026-05-17 18:38:07,700 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-75
+2026-05-17 18:38:07,704 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-20
+2026-05-17 18:38:07,707 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-39
+2026-05-17 18:38:07,712 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-28
+2026-05-17 18:38:07,714 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-54
+2026-05-17 18:38:07,717 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-61
+2026-05-17 18:38:07,719 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-24
+2026-05-17 18:38:07,725 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-26
+2026-05-17 18:38:07,730 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-80
+2026-05-17 18:38:07,732 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-99
+2026-05-17 18:38:07,735 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-95
+2026-05-17 18:38:07,735 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-11
+2026-05-17 18:38:07,738 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-98
+2026-05-17 18:38:07,740 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-77
+2026-05-17 18:38:07,745 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-25
+2026-05-17 18:38:07,757 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-78
+2026-05-17 18:38:07,757 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-10
+2026-05-17 18:38:07,757 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-10
+2026-05-17 18:38:07,772 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-8
+2026-05-17 18:38:07,772 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-8
+2026-05-17 18:38:07,777 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-16
+2026-05-17 18:38:07,777 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-16
+2026-05-17 18:38:07,782 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-41
+2026-05-17 18:38:07,782 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-41
+2026-05-17 18:38:07,789 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-56
+2026-05-17 18:38:07,790 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-56
+2026-05-17 18:38:07,791 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-74
+2026-05-17 18:38:07,791 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-74
+2026-05-17 18:38:07,792 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-43
+2026-05-17 18:38:07,792 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-43
+2026-05-17 18:38:07,793 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-81
+2026-05-17 18:38:07,793 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-81
+2026-05-17 18:38:07,794 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-15
+2026-05-17 18:38:07,794 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-15
+2026-05-17 18:38:07,796 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-36
+2026-05-17 18:38:07,796 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-36
+2026-05-17 18:38:07,797 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-12
+2026-05-17 18:38:07,797 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-12
+2026-05-17 18:38:07,798 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-49
+2026-05-17 18:38:07,798 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-49
+2026-05-17 18:38:07,817 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-19
+2026-05-17 18:38:07,817 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-19
+2026-05-17 18:38:07,822 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-73
+2026-05-17 18:38:07,822 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-73
+2026-05-17 18:38:07,823 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-50
+2026-05-17 18:38:07,823 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-50
+2026-05-17 18:38:07,824 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-66
+2026-05-17 18:38:07,824 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-66
+2026-05-17 18:38:07,831 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-46
+2026-05-17 18:38:07,831 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-46
+2026-05-17 18:38:07,838 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-79
+2026-05-17 18:38:07,838 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-79
+2026-05-17 18:38:07,838 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-76
+2026-05-17 18:38:07,838 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-76
+2026-05-17 18:38:07,840 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-42
+2026-05-17 18:38:07,841 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-42
+2026-05-17 18:38:07,843 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-62
+2026-05-17 18:38:07,843 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-62
+2026-05-17 18:38:07,844 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-89
+2026-05-17 18:38:07,844 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-89
+2026-05-17 18:38:07,850 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-1
+2026-05-17 18:38:07,850 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-1
+2026-05-17 18:38:07,857 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-9
+2026-05-17 18:38:07,857 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-9
+2026-05-17 18:38:07,861 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-71
+2026-05-17 18:38:07,861 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-71
+2026-05-17 18:38:07,864 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-51
+2026-05-17 18:38:07,864 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-51
+2026-05-17 18:38:07,865 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-59
+2026-05-17 18:38:07,865 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-59
+2026-05-17 18:38:07,865 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-13
+2026-05-17 18:38:07,865 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-13
+2026-05-17 18:38:07,866 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-96
+2026-05-17 18:38:07,866 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-96
+2026-05-17 18:38:07,875 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-70
+2026-05-17 18:38:07,875 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-70
+2026-05-17 18:38:07,881 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-68
+2026-05-17 18:38:07,882 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-68
+2026-05-17 18:38:07,884 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-34
+2026-05-17 18:38:07,884 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-34
+2026-05-17 18:38:07,891 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-69
+2026-05-17 18:38:07,892 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-69
+2026-05-17 18:38:07,898 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-18
+2026-05-17 18:38:07,898 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-18
+2026-05-17 18:38:07,900 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-91
+2026-05-17 18:38:07,900 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-91
+2026-05-17 18:38:07,908 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-4
+2026-05-17 18:38:07,908 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-4
+2026-05-17 18:38:07,917 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-2
+2026-05-17 18:38:07,917 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-2
+2026-05-17 18:38:07,921 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-23
+2026-05-17 18:38:07,921 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-23
+2026-05-17 18:38:07,922 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-35
+2026-05-17 18:38:07,922 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-35
+2026-05-17 18:38:07,948 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-93
+2026-05-17 18:38:07,948 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-17
+2026-05-17 18:38:07,948 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-93
+2026-05-17 18:38:07,948 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-17
+2026-05-17 18:38:07,954 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-72
+2026-05-17 18:38:07,954 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-72
+2026-05-17 18:38:07,956 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-37
+2026-05-17 18:38:07,956 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-65
+2026-05-17 18:38:07,956 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-37
+2026-05-17 18:38:07,956 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-65
+2026-05-17 18:38:07,962 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-40
+2026-05-17 18:38:07,963 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-40
+2026-05-17 18:38:07,964 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-30
+2026-05-17 18:38:07,964 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-30
+2026-05-17 18:38:07,985 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-33
+2026-05-17 18:38:07,985 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-33
+2026-05-17 18:38:07,993 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-97
+2026-05-17 18:38:07,993 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-97
+2026-05-17 18:38:08,000 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-52
+2026-05-17 18:38:08,000 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-52
+2026-05-17 18:38:08,013 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-47
+2026-05-17 18:38:08,013 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-47
+2026-05-17 18:38:08,014 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-22
+2026-05-17 18:38:08,014 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-22
+2026-05-17 18:38:08,046 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-53
+2026-05-17 18:38:08,046 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-53
+2026-05-17 18:38:08,053 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-14
+2026-05-17 18:38:08,053 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-14
+2026-05-17 18:38:08,054 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-67
+2026-05-17 18:38:08,054 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-84
+2026-05-17 18:38:08,054 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-67
+2026-05-17 18:38:08,054 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-84
+2026-05-17 18:38:08,055 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-87
+2026-05-17 18:38:08,055 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-87
+2026-05-17 18:38:08,059 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-88
+2026-05-17 18:38:08,059 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-88
+2026-05-17 18:38:08,143 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-92
+2026-05-17 18:38:08,143 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-92
+2026-05-17 18:38:08,163 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-55
+2026-05-17 18:38:08,163 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-83
+2026-05-17 18:38:08,163 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-55
+2026-05-17 18:38:08,163 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-83
+2026-05-17 18:38:08,236 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-27
+2026-05-17 18:38:08,237 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-27
+2026-05-17 18:38:08,254 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-60
+2026-05-17 18:38:08,255 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-60
+2026-05-17 18:38:08,259 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-38
+2026-05-17 18:38:08,260 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-82
+2026-05-17 18:38:08,260 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-38
+2026-05-17 18:38:08,260 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-82
+2026-05-17 18:38:08,267 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-86
+2026-05-17 18:38:08,267 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-86
+2026-05-17 18:38:08,284 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-29
+2026-05-17 18:38:08,284 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-29
+2026-05-17 18:38:08,325 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-44
+2026-05-17 18:38:08,326 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-44
+2026-05-17 18:38:08,355 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-48
+2026-05-17 18:38:08,355 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-48
+2026-05-17 18:38:08,435 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-7
+2026-05-17 18:38:08,435 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-7
+2026-05-17 18:38:08,854 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-45
+2026-05-17 18:38:08,854 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-45
+2026-05-17 18:38:08,967 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: Load Users 1-58
+2026-05-17 18:38:08,967 INFO o.a.j.t.JMeterThread: Thread finished: Load Users 1-58
+2026-05-17 18:38:08,968 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2026-05-17 18:38:08,973 INFO o.a.j.r.Summariser: summary +   1903 in 00:00:09 =  212.4/s Avg:   339 Min:     2 Max:  2210 Err:     0 (0.00%) Active: 0 Started: 100 Finished: 100
+2026-05-17 18:38:08,973 INFO o.a.j.r.Summariser: summary =  13967 in 00:01:01 =  228.0/s Avg:   333 Min:     1 Max:  2213 Err:     0 (0.00%)

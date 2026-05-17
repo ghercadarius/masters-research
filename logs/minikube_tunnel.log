@@ -1,7 +1,7 @@
 Status:	
 	machine: sku-bench
-	pid: 112364
-	route: 10.96.0.0/12 -> 192.168.39.46
+	pid: 234623
+	route: 10.96.0.0/12 -> 192.168.39.233
 	minikube: Running
 	services: []
     errors: 
@@ -10,11 +10,22 @@ Status:
 		loadbalancer emulator: no errors
 Status:	
 	machine: sku-bench
-	pid: 112364
-	route: 10.96.0.0/12 -> 192.168.39.46
+	pid: 234623
+	route: 10.96.0.0/12 -> 192.168.39.233
 	minikube: Running
 	services: [sample-python-webapp]
     errors: 
 		minikube: no errors
 		router: no errors
+		loadbalancer emulator: no errors
+E0517 20:14:42.276172  234623 tunnel.go:147] failed to register tunnel: there is already a running tunnel for this machine: ID { Route: 10.96.0.0/12 -> 192.168.39.233, machineName: sku-bench, Pid: 234623 }
+Status:	
+	machine: sku-bench
+	pid: 234623
+	route: 10.96.0.0/12 -> 192.168.39.233
+	minikube: Running
+	services: [sample-python-webapp]
+    errors: 
+		minikube: no errors
+		router: there is already a running tunnel for this machine: ID { Route: 10.96.0.0/12 -> 192.168.39.233, machineName: sku-bench, Pid: 234623 }
 		loadbalancer emulator: no errors

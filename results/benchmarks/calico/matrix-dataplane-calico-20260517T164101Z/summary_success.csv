@@ -1,0 +1,7 @@
+sku_id,run_id,cpu,memory_mb,replicas,total_requests,success_requests,avg_latency_ms,avg_vm_watts,avg_host_watts,power_samples,dataplane_mode,endpoint,run_dir
+c8-r8g,20260517T164101Z,8,8192,24,8880,8880,578,435166,666667,51,833333,6,calico,http://10.101.177.204:80,/home/darius/dizertatie/masters-research/results/c8-r8g/20260517T164101Z
+c8-r16g,20260517T164353Z,8,16384,32,9055,9055,563,434333,333333,67,666667,6,calico,http://10.102.215.152:80,/home/darius/dizertatie/masters-research/results/c8-r16g/20260517T164353Z
+c8-r24g,20260517T164645Z,8,24576,32,9014,9014,568,620500,000000,37,166667,6,calico,http://10.105.232.246:80,/home/darius/dizertatie/masters-research/results/c8-r24g/20260517T164645Z
+c16-r8g,20260517T164933Z,16,8192,24,10245,10245,488,652833,333333,52,833333,6,calico,http://192.168.39.195:32480,/home/darius/dizertatie/masters-research/results/c16-r8g/20260517T164933Z
+c16-r16g,20260517T165300Z,16,16384,49,14047,14047,331,803166,666667,53,166667,6,calico,http://10.109.139.131:80,/home/darius/dizertatie/masters-research/results/c16-r16g/20260517T165300Z
+c16-r24g,20260517T165549Z,16,24576,64,14280,14280,324,541833,333333,41,833333,6,calico,http://10.105.200.60:80,/home/darius/dizertatie/masters-research/results/c16-r24g/20260517T165549Z

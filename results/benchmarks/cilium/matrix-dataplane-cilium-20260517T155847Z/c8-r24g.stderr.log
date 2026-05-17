@@ -1,0 +1,4 @@
+! Starting v1.39.0, minikube will default to "containerd" container runtime. See #21973 for more info.
+! Failing to connect to https://registry.k8s.io/ from both inside the minikube VM and host machine
+* To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
+E0517 19:03:39.866269  167991 logFile.go:53] failed to close the audit log: invalid argument

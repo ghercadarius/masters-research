@@ -1,0 +1,2 @@
+sku_id,run_id,cpu,memory_mb,replicas,total_requests,success_requests,avg_latency_ms,avg_vm_watts,avg_host_watts,power_samples,dataplane_mode,endpoint
+c8-r24g,20260517T163119Z,8,24576,32,8983,8983,569,448333,333333,48,333333,6,baseline,http://192.168.39.12:32641

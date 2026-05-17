@@ -1,0 +1,2 @@
+sku_id,run_id,cpu,memory_mb,replicas,total_requests,success_requests,avg_latency_ms,avg_vm_watts,avg_host_watts,power_samples,dataplane_mode,endpoint
+c16-r8g,20260517T170805Z,16,8192,24,10198,10198,492,632333,333333,32,333333,6,cilium,http://192.168.39.145:30096

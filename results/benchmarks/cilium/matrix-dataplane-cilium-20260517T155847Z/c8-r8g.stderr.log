@@ -1,0 +1,20 @@
+! Starting v1.39.0, minikube will default to "containerd" container runtime. See #21973 for more info.
+E0517 18:59:17.776109  163325 logFile.go:53] failed to close the audit log: invalid argument
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 282B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.11-slim
+#2 ERROR: failed to authorize: failed to fetch anonymous token: Get "https://auth.docker.io/token?scope=repository%3Alibrary%2Fpython%3Apull&service=registry.docker.io": dial tcp: lookup auth.docker.io on 127.0.0.53:53: server misbehaving
+------
+ > [internal] load metadata for docker.io/library/python:3.11-slim:
+------
+Dockerfile:1
+--------------------
+   1 | >>> FROM python:3.11-slim
+   2 |     WORKDIR /app
+   3 |     COPY requirements.txt /app/requirements.txt
+--------------------
+ERROR: failed to build: failed to solve: failed to fetch anonymous token: Get "https://auth.docker.io/token?scope=repository%3Alibrary%2Fpython%3Apull&service=registry.docker.io": dial tcp: lookup auth.docker.io on 127.0.0.53:53: server misbehaving
