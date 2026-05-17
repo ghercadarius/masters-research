@@ -92,7 +92,7 @@ def parse_run_summary_line(line: str) -> Optional[Dict[str, str]]:
         return None
 
     fixed_left = parts[:8]
-    dataplane_modes = {"baseline", "calico-ebpf", "cilium"}
+    dataplane_modes = {"baseline", "calico", "calico-ebpf", "cilium"}
     has_dataplane = len(parts) >= 13 and parts[-2] in dataplane_modes
     fixed_right = parts[-3:] if has_dataplane else parts[-2:]
     middle = parts[8:-3] if has_dataplane else parts[8:-2]
@@ -240,7 +240,7 @@ def main() -> None:
 
     variant_order = [
         mode
-        for mode in ["baseline", "calico-ebpf", "cilium"]
+        for mode in ["baseline", "calico", "calico-ebpf", "cilium"]
         if mode in df["dataplane_mode"].unique().tolist()
     ]
     if not variant_order:
@@ -252,7 +252,12 @@ def main() -> None:
         .tolist()
     )
 
-    palette = {"baseline": "#2a9d8f", "calico-ebpf": "#264653", "cilium": "#f4a261"}
+    palette = {
+        "baseline": "#2a9d8f",
+        "calico": "#577590",
+        "calico-ebpf": "#264653",
+        "cilium": "#f4a261",
+    }
 
     metrics = [
         "throughput_rps",
