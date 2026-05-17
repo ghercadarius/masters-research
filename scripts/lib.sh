@@ -131,6 +131,23 @@ wait_for_resource_objects() {
   return 1
 }
 
+apply_calico_ebpf_felix_config() {
+  local felix_config_path
+  felix_config_path="${CALICO_EBPF_FELIX_CONFIG_PATH:-config/calico-ebpf-felix.yaml}"
+  felix_config_path="$(resolve_path "$felix_config_path")"
+  if [[ ! -f "$felix_config_path" ]]; then
+    log "Warning: Calico Felix config not found: $felix_config_path"
+    return 0
+  fi
+
+  if ! kubectl get crd felixconfigurations.crd.projectcalico.org >/dev/null 2>&1; then
+    wait_for_crd_established felixconfigurations.crd.projectcalico.org 240
+  fi
+
+  log "Applying Calico Felix config: $felix_config_path"
+  kubectl apply -f "$felix_config_path"
+}
+
 configure_dataplane() {
   local mode
   mode="$(normalize_dataplane_mode "${1:-baseline}")"
@@ -157,6 +174,7 @@ configure_dataplane() {
         fi
         log "Applying Calico eBPF manifest: $ebpf_manifest_path"
         kubectl apply -f "$ebpf_manifest_path"
+        apply_calico_ebpf_felix_config
       else
         local operator_manifest
         local custom_resources_path
@@ -174,6 +192,7 @@ configure_dataplane() {
         wait_for_crd_established tigerastatuses.operator.tigera.io 240
         log "Applying Calico eBPF custom resources: $custom_resources_path"
         kubectl apply -f "$custom_resources_path"
+        apply_calico_ebpf_felix_config
         log "Waiting for Calico eBPF components to be ready"
         if wait_for_resource_objects tigerastatus 300; then
           kubectl wait --for=condition=Available tigerastatus --all --timeout=600s

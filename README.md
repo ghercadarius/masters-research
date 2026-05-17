@@ -151,6 +151,7 @@ and installs the Tigera operator + custom resources from:
 
 - `CALICO_EBPF_OPERATOR_MANIFEST_URL`
 - `CALICO_EBPF_CUSTOM_RESOURCES_PATH` (default: `config/calico-ebpf-custom-resources.yaml`)
+- `CALICO_EBPF_FELIX_CONFIG_PATH` (default: `config/calico-ebpf-felix.yaml`)
 
 By default kube-proxy is disabled after Calico eBPF is ready; control this with:
 
